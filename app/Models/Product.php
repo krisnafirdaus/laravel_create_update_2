@@ -14,14 +14,11 @@ class Product extends Model
         'description',
         'price',
         'stock',
-        'category_id',
-        'is_active'
     ];
 
     protected $casts = [
         'price' => 'integer',
         'stock' => 'integer',
-        'is_active' => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
