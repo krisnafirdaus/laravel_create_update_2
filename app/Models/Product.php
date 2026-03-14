@@ -29,10 +29,37 @@ class Product extends Model
     ];
 
     protected $appends = [
-        'formatted_price'
+        'formatted_price'// snaka case
     ];
 
-    public function getFormattedPriceAttribute(): string
+
+    // get{NamaAttribute}Attribute()
+    // Nama Attribut = FormattedPrice = formatted_price
+    // $product->formatted_price
+
+    // Product Model
+    //  ↓
+    // cek $appends
+    //     ↓
+    // formatted_price
+    //     ↓
+    // Laravel cari method:
+    // getFormattedPriceAttribute()
+    //     ↓
+    // jalankan function
+    //     ↓
+    // hasil dimasukkan ke JSON'
+
+    // {
+    //     "id": 1,
+    //     "name": "Laptop",
+    //     "description": "Gaming laptop",
+    //     "price": 15000000,
+    //     "stock": 5,
+    //     "formatted_price": "Rp 15.000.000"
+    // }
+
+    public function getFormattedPriceAttribute(): string // accessor harus camel case
     {
         return 'Rp ' . number_format($this->price, 0, ',', '.');
     }
