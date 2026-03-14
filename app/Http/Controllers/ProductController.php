@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
+use App\Traits\ApiResponse;
 
 class ProductController extends Controller
 {
+    use ApiResponse;
+
     public function index(Request $request): JsonResponse
     {
         // $products = Product::all();
@@ -23,9 +26,7 @@ class ProductController extends Controller
 
         $products = $query->paginate(10);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Products retrieved successfully',
+        return $this->successResponse([
             'data' => $products->items(),
             'meta' => [
                 'current_page' => $products->currentPage(),
