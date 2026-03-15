@@ -1,5 +1,10 @@
 {
   "enabledMcpjsonServers": [
     "laravel-boost"
-  ]
+  ],
+  "permissions": {
+    "allow": [
+      "Bash(vendor/bin/pint bootstrap/app.php --format agent)"
+    ]
+  }
 }
