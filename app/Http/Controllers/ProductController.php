@@ -54,10 +54,26 @@ class ProductController extends Controller
         $product = Product::create($validated);
         
         // 3. return response JSON
-        return response()->json([
-            'success' => true,
-            'message' => 'Product created successfully',
-            'data' => $product
+        return $this->successResponse($product, 'Produk berhasil dibuat', 201);
+    }
+
+    public function update(Request $request, Product $product): JsonResponse
+    {
+        // 1. validasi input
+        $validated = $request->validate([
+            'name' => 'sometimes|string|min:3|max:255',
+            'description' => 'nullable|string|max:1000',
+            'price' => 'sometimes|integer|min:0',
+            'stock' => 'sometimes|integer|min:0',
+        ], [
+            'name.required' => 'Tolong dong nama produknya diisi',
+            'name.min' => 'Tolong dong minimal 3 karakter untuk nama produk',
         ]);
+        
+        // 2. update data
+        $product->update($validated);
+        
+        // 3. return response JSON
+        return $this->successResponse($product, 'Produk berhasil diupdate');
     }
 }
