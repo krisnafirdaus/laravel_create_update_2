@@ -120,5 +120,13 @@ class ProductController extends Controller
     //     return $this->successResponse(null, "Produk '$productName' berhasil dihapus");
     // }
 
+     public function trashed(): JsonResponse
+    {
+       $deletedProducts = Product::onlyTrashed()->get();
+        
+        // 3. return response JSON
+        return $this->successResponse($deletedProducts, "Berhasil mengambil produk yang dihapus");
+    }
+
     
 }
