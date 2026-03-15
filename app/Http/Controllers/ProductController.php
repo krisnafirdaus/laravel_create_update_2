@@ -98,26 +98,27 @@ class ProductController extends Controller
         return $this->successResponse($product, 'Produk berhasil diupdate');
     }
 
-    // public function destroy(int $id): JsonResponse
-    // {
-    //     // 2. cari & hapus data
-    //     $product = Product::findOrFail($id);
-    //     $product->delete();
-        
-    //     // 3. return response JSON
-    //     return $this->successResponse(null, 'Produk berhasil dihapus');
-    // }
-
-     public function destroy(Product $product): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
-       $productName = $product->name;
-
         // 2. cari & hapus data
+        $product = Product::findOrFail($id);
+        $productName = $product->name;
         $product->delete();
         
         // 3. return response JSON
         return $this->successResponse(null, "Produk '$productName' berhasil dihapus");
     }
+
+    //  public function destroy(Product $product): JsonResponse
+    // {
+    //    $productName = $product->name;
+
+    //     // 2. cari & hapus data
+    //     $product->delete();
+        
+    //     // 3. return response JSON
+    //     return $this->successResponse(null, "Produk '$productName' berhasil dihapus");
+    // }
 
     
 }
